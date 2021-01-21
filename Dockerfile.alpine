@@ -1,4 +1,4 @@
-FROM python:3.8.7-alpine3.12
+FROM python:3.8.7-alpine3.12@sha256:fa6434c43f6922aaa7b0ed75a3ddc6e45360001d764965b4be27e057777fc072
 
 # renovate: datasource=pypi depName=determine-docker-tags versioning=semver
 ENV DETERMINE_DOCKER_TAGS_VERSION v0.1.1
