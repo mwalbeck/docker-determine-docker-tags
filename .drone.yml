@@ -4,15 +4,15 @@ type: docker
 name: alpine_build
 
 steps:
-  # - name: determine tags
-  #   image: mwalbeck/determine-docker-tags
-  #   environment:
-  #     VERSION_TYPE: "docker_env"
-  #     APP_NAME: "DETERMINE_DOCKER_TAGS"
-  #     DOCKERFILE_PATH: "Dockerfile.alpine"
-  #     APP_ENV: "alpine"
-  #     CUSTOM_TAGS: "latest,alpine"
-  #     INCLUDE_MAJOR: "no"
+  - name: determine tags
+    image: mwalbeck/determine-docker-tags
+    environment:
+      VERSION_TYPE: "docker_env"
+      APP_NAME: "DETERMINE_DOCKER_TAGS"
+      DOCKERFILE_PATH: "Dockerfile.alpine"
+      APP_ENV: "alpine"
+      CUSTOM_TAGS: "latest,alpine"
+      INCLUDE_MAJOR: "no"
 
   - name: build and publish
     image: plugins/docker
@@ -69,15 +69,15 @@ type: docker
 name: debian_build
 
 steps:
-  # - name: determine tags
-  #   image: mwalbeck/determine-docker-tags
-  #   environment:
-  #     VERSION_TYPE: "docker_env"
-  #     APP_NAME: "DETERMINE_DOCKER_TAGS"
-  #     DOCKERFILE_PATH: "Dockerfile.debian"
-  #     APP_ENV: "debian"
-  #     CUSTOM_TAGS: "debian"
-  #     INCLUDE_MAJOR: "no"
+  - name: determine tags
+    image: mwalbeck/determine-docker-tags
+    environment:
+      VERSION_TYPE: "docker_env"
+      APP_NAME: "DETERMINE_DOCKER_TAGS"
+      DOCKERFILE_PATH: "Dockerfile.debian"
+      APP_ENV: "debian"
+      CUSTOM_TAGS: "debian"
+      INCLUDE_MAJOR: "no"
 
   - name: build and publish
     image: plugins/docker
