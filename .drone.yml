@@ -23,9 +23,6 @@ steps:
       password:
         from_secret: dockerhub_password
       repo: mwalbeck/determine-docker-tags
-      tags:
-        - "latest"
-        - "alpine"
   
   - name: notify
     image: plugins/matrix
@@ -88,8 +85,6 @@ steps:
       password:
         from_secret: dockerhub_password
       repo: mwalbeck/determine-docker-tags
-      tags:
-        - "debian"
   
   - name: notify
     image: plugins/matrix
