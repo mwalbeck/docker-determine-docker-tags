@@ -1,0 +1,108 @@
+---
+kind: pipeline
+type: docker
+name: alpine_build
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: Dockerfile.alpine
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+      repo: mwalbeck/determine-docker-tags
+      tags:
+        - "latest"
+        - "alpine"
+  
+  - name: notify
+    image: plugins/matrix
+    settings:
+      homeserver: https://matrix.mwalbeck.org
+      roomid:
+        from_secret: matrix_roomid
+      username:
+        from_secret: matrix_username
+      password:
+        from_secret: matrix_password
+    when:
+      status:
+        - success
+        - failure
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
+---
+kind: pipeline
+type: docker
+name: alpine_test
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: Dockerfile.alpine
+      repo: mwalbeck/determine-docker-tags
+      dry_run: true
+trigger:
+  event:
+    - pull_request
+
+---
+kind: pipeline
+type: docker
+name: debian_build
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: Dockerfile.debian
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+      repo: mwalbeck/determine-docker-tags
+      tags:
+        - "debian"
+  
+  - name: notify
+    image: plugins/matrix
+    settings:
+      homeserver: https://matrix.mwalbeck.org
+      roomid:
+        from_secret: matrix_roomid
+      username:
+        from_secret: matrix_username
+      password:
+        from_secret: matrix_password
+    when:
+      status:
+        - success
+        - failure
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
+---
+kind: pipeline
+type: docker
+name: debian_test
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: Dockerfile.debian
+      repo: mwalbeck/determine-docker-tags
+      dry_run: true
+trigger:
+  event:
+    - pull_request
