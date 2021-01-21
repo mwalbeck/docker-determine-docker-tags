@@ -7,6 +7,4 @@ RUN set -ex; \
     \
     pip install determine-docker-tags==$DETERMINE_DOCKER_TAGS_VERSION;
 
-USER nobody
-
 CMD [ "determine-docker-tags" ]
