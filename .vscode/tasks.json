@@ -3,19 +3,19 @@
 	"tasks": [
 		{
 			"type": "docker-build",
-			"label": "docker-build: alpine",
+			"label": "docker-build",
 			"dockerBuild": {
-				"tag": "dockerdeterminedockertags:alpine",
-				"dockerfile": "${workspaceFolder}/Dockerfile.alpine",
+				"tag": "dockerdeterminedockertags:latest",
+				"dockerfile": "${workspaceFolder}/Dockerfile",
 				"context": "${workspaceFolder}",
 				"pull": true
 			}
 		},
 		{
 			"type": "docker-run",
-			"label": "docker-run: alpine",
+			"label": "docker-run",
 			"dockerRun": {
-				"image": "dockerdeterminedockertags:alpine",
+				"image": "dockerdeterminedockertags:latest",
 				"remove": true
 			},
 			"dependsOn": [
@@ -23,21 +23,12 @@
 			],
 		},
 		{
-			"type": "docker-build",
-			"label": "docker-build: debian",
-			"dockerBuild": {
-				"tag": "dockerdeterminedockertags:debian",
-				"dockerfile": "${workspaceFolder}/Dockerfile.debian",
-				"context": "${workspaceFolder}",
-				"pull": true
-			}
-		},
-		{
 			"type": "docker-run",
-			"label": "docker-run: debian",
+			"label": "docker-run: bash",
 			"dockerRun": {
-				"image": "dockerdeterminedockertags:debian",
-				"remove": true
+				"image": "dockerdeterminedockertags:latest",
+				"remove": true,
+				"command": "bash"
 			},
 			"dependsOn": [
 				"docker-build"
