@@ -5,6 +5,6 @@ ENV DETERMINE_DOCKER_TAGS_VERSION 0.1.5
 
 RUN set -ex; \
     \
-    pip install determine-docker-tags==$DETERMINE_DOCKER_TAGS_VERSION;
+    pip install --no-cache-dir determine-docker-tags==$DETERMINE_DOCKER_TAGS_VERSION;
 
 CMD [ "determine-docker-tags" ]

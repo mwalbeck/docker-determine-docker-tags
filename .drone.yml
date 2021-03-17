@@ -1,7 +1,46 @@
 ---
 kind: pipeline
 type: docker
-name: debian_build
+name: lint
+
+steps:
+  - name: Lint Dockerfile
+    image: hadolint/hadolint
+    commands:
+      - hadolint Dockerfile
+
+trigger:
+  event:
+    - pull_request
+    - push
+  ref:
+    exclude:
+      - refs/heads/renovate/*
+
+---
+kind: pipeline
+type: docker
+name: test
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      dockerfile: Dockerfile
+      repo: mwalbeck/determine-docker-tags
+      dry_run: true
+
+trigger:
+  event:
+    - pull_request
+
+depends_on:
+  - lint
+
+---
+kind: pipeline
+type: docker
+name: build and publish
 
 steps:
   - name: determine tags
@@ -44,18 +83,5 @@ trigger:
   event:
     - push
 
----
-kind: pipeline
-type: docker
-name: debian_test
-
-steps:
-  - name: docker
-    image: plugins/docker
-    settings:
-      dockerfile: Dockerfile
-      repo: mwalbeck/determine-docker-tags
-      dry_run: true
-trigger:
-  event:
-    - pull_request
+depends_on:
+  - lint
