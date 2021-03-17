@@ -1,0 +1,15 @@
+FROM curlimages/curl:7.75.0 as download
+
+# renovate: datasource=git-tags depName=https://git.walbeck.it/walbeck-it/determine-docker-tags versioning=semver
+ENV DETERMINE_DOCKER_TAGS_VERSION v0.1.5
+
+RUN set -ex; \
+    \
+    curl -o /home/curl_user/determine-docker-tags.py \
+    https://git.walbeck.it/walbeck-it/determine-docker-tags/raw/tag/${DETERMINE_DOCKER_TAGS_VERSION}/determine_docker_tags/__init__.py;
+
+FROM gcr.io/distroless/python3-debian10:nonroot
+
+COPY --from=download /home/curl_user/determine-docker-tags.py /
+
+CMD [ "/determine-docker-tags.py" ]
