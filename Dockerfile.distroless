@@ -1,7 +1,7 @@
 FROM curlimages/curl:7.75.0@sha256:28ec2dae8001949f657dbb36141508d65572f382dbd587f868289e2ceb0d47dd as download
 
 # renovate: datasource=git-tags depName=https://git.walbeck.it/walbeck-it/determine-docker-tags versioning=semver
-ENV DETERMINE_DOCKER_TAGS_VERSION v0.1.5
+ENV DETERMINE_DOCKER_TAGS_VERSION v0.1.6
 
 RUN set -ex; \
     \
