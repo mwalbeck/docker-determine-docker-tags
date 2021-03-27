@@ -10,7 +10,7 @@ The program is configured entirely with environment variables for easy configura
 There are two variants of this image. One using the offical debian based python image and one using the distroless python variant. The relevant tags are as follows (x is a placeholder for the current patch version):
 
 * 0.1, 0.1.x, latest
-* 0.1-distroless, 0.1.x-distroless
+* 0.1-distroless, 0.1.x-distroless, latest-distroless
 
 ## License
 
