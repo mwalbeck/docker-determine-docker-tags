@@ -120,7 +120,7 @@ steps:
       APP_NAME: "DETERMINE_DOCKER_TAGS"
       DOCKERFILE_PATH: "Dockerfile.distroless"
       APP_ENV: "distroless"
-      CUSTOM_TAGS: ""
+      CUSTOM_TAGS: "latest-distroless"
       INCLUDE_MAJOR: "no"
 
   - name: build and publish
