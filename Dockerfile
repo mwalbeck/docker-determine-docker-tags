@@ -1,4 +1,4 @@
-FROM python:3.8.12-slim-buster@sha256:70e4517b235fac240e7615282b5c7036fcb7723240b5760f51271387adddc154
+FROM python:3.8.12-slim-buster@sha256:7e3279e3c70abff51d53d703ae0dad5db6abfa049728c3526a8cc51a8a64473d
 
 # renovate: datasource=pypi depName=determine-docker-tags versioning=semver
 ENV DETERMINE_DOCKER_TAGS_VERSION 0.1.10
