@@ -1,4 +1,4 @@
-FROM python:3.8.12-slim-bullseye@sha256:11f19d1501921ca8537312961c1982b79ee7e19868e2733ad21c140c35e71dac
+FROM python:3.8.12-slim-bullseye@sha256:c0546247d04be3fda1ff07d29678b3a349b645149bf146f1c5a4ae6ec7d67c0e
 
 # renovate: datasource=pypi depName=determine-docker-tags versioning=semver
 ENV DETERMINE_DOCKER_TAGS_VERSION 0.1.10
