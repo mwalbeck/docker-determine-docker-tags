@@ -1,10 +1,15 @@
-FROM python:3.8.13-slim-bullseye@sha256:84713dbb75ab4fb81a4a2233e41c4357cfcb6c2a0cb3b5f295deb5cf5ad50850
+FROM curlimages/curl:7.82.0@sha256:c1c1cda72ab8c306390fc05518bf4d42148564978326d078f65d546858d139cb as download
 
-# renovate: datasource=pypi depName=determine-docker-tags versioning=semver
-ENV DETERMINE_DOCKER_TAGS_VERSION 0.1.10
+# renovate: datasource=git-tags depName=https://git.walbeck.it/walbeck-it/determine-docker-tags versioning=semver
+ENV DETERMINE_DOCKER_TAGS_VERSION v0.1.10
 
 RUN set -ex; \
     \
-    pip install --no-cache-dir determine-docker-tags==$DETERMINE_DOCKER_TAGS_VERSION;
+    curl -o /home/curl_user/determine-docker-tags.py \
+    https://git.walbeck.it/walbeck-it/determine-docker-tags/raw/tag/${DETERMINE_DOCKER_TAGS_VERSION}/determine_docker_tags/__init__.py;
 
-CMD [ "determine-docker-tags" ]
+FROM gcr.io/distroless/python3-debian11@sha256:0d8ee86710b55aa06b808a87c025289e9cf15932aa764abd02da84be0e9d819b
+
+COPY --from=download /home/curl_user/determine-docker-tags.py /
+
+CMD [ "/determine-docker-tags.py" ]

@@ -47,31 +47,6 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: test_distroless
-
-steps:
-  - name: docker
-    image: plugins/docker
-    pull: if-not-exists
-    settings:
-      dockerfile: Dockerfile.distroless
-      username:
-        from_secret: dockerhub_username
-      password:
-        from_secret: dockerhub_password_ro
-      repo: mwalbeck/determine-docker-tags
-      dry_run: true
-
-trigger:
-  event:
-    - pull_request
-
-depends_on:
-  - lint
-
----
-kind: pipeline
-type: docker
 name: build and publish
 
 steps:
@@ -96,59 +71,7 @@ steps:
       password:
         from_secret: dockerhub_password
       repo: mwalbeck/determine-docker-tags
-  
-  - name: notify
-    image: plugins/matrix
-    pull: if-not-exists
-    settings:
-      homeserver: https://matrix.mwalbeck.org
-      roomid:
-        from_secret: matrix_roomid
-      username:
-        from_secret: matrix_username
-      password:
-        from_secret: matrix_password
-    when:
-      status:
-        - success
-        - failure
-trigger:
-  branch:
-    - master
-  event:
-    - push
 
-depends_on:
-  - lint
-
----
-kind: pipeline
-type: docker
-name: build and publish distroless
-
-steps:
-  - name: determine tags
-    image: mwalbeck/determine-docker-tags
-    pull: if-not-exists
-    environment:
-      VERSION_TYPE: "docker_env"
-      APP_NAME: "DETERMINE_DOCKER_TAGS"
-      DOCKERFILE_PATH: "Dockerfile.distroless"
-      APP_ENV: "distroless"
-      CUSTOM_TAGS: "latest-distroless"
-      INCLUDE_MAJOR: "no"
-
-  - name: build and publish
-    image: plugins/docker
-    pull: if-not-exists
-    settings:
-      dockerfile: Dockerfile.distroless
-      username:
-        from_secret: dockerhub_username
-      password:
-        from_secret: dockerhub_password
-      repo: mwalbeck/determine-docker-tags
-  
   - name: notify
     image: plugins/matrix
     pull: if-not-exists
@@ -175,6 +98,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 5468a46865cb534e9cd686bb8393f5c07d1e8ee56d543b3b4c6e24eef862c717
+hmac: 6c21d67e660b19efa956ee044bba61144aecdafbcff9870fc1773482963bab98
 
 ...
