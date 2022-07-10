@@ -8,7 +8,7 @@ RUN set -ex; \
     curl -o /home/curl_user/determine-docker-tags.py \
     https://git.walbeck.it/walbeck-it/determine-docker-tags/raw/tag/${DETERMINE_DOCKER_TAGS_VERSION}/determine_docker_tags/__init__.py;
 
-FROM gcr.io/distroless/python3-debian11@sha256:8d85861bce59d78b171fa9f23223e5197aad13035fe7e9f411b1a983da8eddd0
+FROM gcr.io/distroless/python3-debian11@sha256:6093fe0037ef99ca292383b7b78258fa0f823e74927b2fb0a0e87a6a8a917a7d
 
 COPY --from=download /home/curl_user/determine-docker-tags.py /
 
