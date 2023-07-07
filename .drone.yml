@@ -72,21 +72,6 @@ steps:
         from_secret: dockerhub_password
       repo: mwalbeck/determine-docker-tags
 
-  - name: notify
-    image: plugins/matrix
-    pull: if-not-exists
-    settings:
-      homeserver: https://matrix.mwalbeck.org
-      roomid:
-        from_secret: matrix_roomid
-      username:
-        from_secret: matrix_username
-      password:
-        from_secret: matrix_password
-    when:
-      status:
-        - success
-        - failure
 trigger:
   branch:
     - master
@@ -98,6 +83,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 6c21d67e660b19efa956ee044bba61144aecdafbcff9870fc1773482963bab98
+hmac: 001684f17e560bc7321fcf05be1ea955e1a9038abd727acb5a63704487865ea5
 
 ...
