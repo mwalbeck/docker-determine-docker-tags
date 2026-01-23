@@ -26,7 +26,7 @@ jobs:
           CUSTOM_TAGS: "latest"
           INCLUDE_SUFFIX: "no"
           INCLUDE_MAJOR: "no"
-          IMAGE_NAME: "git.walbeck.it/mwalbeck/determine-docker-tags"
+          IMAGE_NAME: "git.walbeck.it/walbeck-it/determine-docker-tags"
         run: |
           determine-docker-tags
           dockerd &
