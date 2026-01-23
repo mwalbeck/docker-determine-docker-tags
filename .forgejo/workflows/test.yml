@@ -26,15 +26,10 @@ jobs:
           CUSTOM_TAGS: "latest"
           INCLUDE_SUFFIX: "no"
           INCLUDE_MAJOR: "no"
-          IMAGE_NAME: "mwalbeck/determine-docker-tags"
+          IMAGE_NAME: "git.walbeck.it/mwalbeck/determine-docker-tags"
         run: |
           determine-docker-tags
           dockerd &
-      - name: Login to Docker Hub
-        uses: https://github.com/docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN_RO }}
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v3
       - name: Test build
